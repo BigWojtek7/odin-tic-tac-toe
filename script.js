@@ -45,13 +45,13 @@ function Cell() {
 
 
 
-function GameEngine() {
+function GameEngine(p1 = "player11", p2 = "player22") {
   players = [{
-    name: "player one",
+    name: p1,
     token: "X"
   },
   {
-    name: "player two",
+    name: p2,
     token: "O"
   }];
 
@@ -103,8 +103,8 @@ function GameEngine() {
 }
 
 
-function DisplayHandler() {
-  const game = GameEngine();
+function DisplayHandler(playerName1, playerName2) {
+  const game = GameEngine(playerName1, playerName2);
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
 
@@ -170,8 +170,9 @@ function ScoreHandler(){
       e.preventDefault()
       const player1 = document.getElementById("player1").value;
       const player2 = document.getElementById("player2").value;
+      DisplayHandler(player1, player2)
       dialog.close();
-      return player1, player2;
+      
     }
     
     )
@@ -188,5 +189,3 @@ function ScoreHandler(){
 }
 
 ScoreHandler().getInput()
-
-DisplayHandler()
