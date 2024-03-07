@@ -137,43 +137,20 @@ function DisplayHandler() {
 
       });   
     });
-    // const allButtons = document.querySelectorAll(".cell");
-    // const getButtons = () => allButtons;
-    // return {getButtons};
   }
-
-
-
-
 
     function clickHandler(e){
       const buttonRow = e.target.dataset.row;
       const buttonColumn = e.target.dataset.column;
       
-      
       console.log(e.target)
       console.log(e.currentTarget)
-      // e.target.setAttribute("disabled", true)
-      // if (e.target.getAttribute("disabled") === "true" ) return;
       if(!buttonRow) return;
       if(!buttonColumn) return;
     
-
       game.playRound(buttonRow, buttonColumn)
       updateDisplay()
-      
-
     }
-    // const allButtons = updateDisplay().getButtons()
-    // console.log(updateDisplay().getButtons())
-
-    // allButtons.forEach((button) => {
-    //   button.addEventListener("click", clickHandler)
-    //   console.log(button)
-      
-    
-    
-    // });
     
     boardDiv.addEventListener("click", clickHandler);
     updateDisplay();
