@@ -139,21 +139,36 @@ function DisplayHandler() {
     });
   }
 
-    function clickHandler(e){
-      const buttonRow = e.target.dataset.row;
-      const buttonColumn = e.target.dataset.column;
-      
-      console.log(e.target)
-      console.log(e.currentTarget)
-      if(!buttonRow) return;
-      if(!buttonColumn) return;
+  function clickHandler(e){
+    const buttonRow = e.target.dataset.row;
+    const buttonColumn = e.target.dataset.column;
     
-      game.playRound(buttonRow, buttonColumn)
-      updateDisplay()
-    }
-    
-    boardDiv.addEventListener("click", clickHandler);
-    updateDisplay();
+    console.log(e.target)
+    console.log(e.currentTarget)
+    if(!buttonRow) return;
+    if(!buttonColumn) return;
+  
+    game.playRound(buttonRow, buttonColumn)
+    updateDisplay()
+  }
+  
+  boardDiv.addEventListener("click", clickHandler);
+  updateDisplay();
+  
+}
+
+function ScoreHandler(){
+
+  const showDialog = () => {
+    const dialog = document.querySelector("dialog");
+    const closeButton = document.querySelector("dialog button");
+    dialog.showModal();
+
+    closeButton.addEventListener("click", () => {
+      dialog.close();
+    });
+  }
+
   
 }
 
