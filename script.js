@@ -15,7 +15,7 @@ function Gameboard() {
   const getBoard = () => board;
 
   const dropToken = (row, column, player) => {
-    if (board[row][column].getValue() === 0){
+    if (board[row][column].getValue() === ""){
       board[row][column].addToken(player);
     }
   };
@@ -33,7 +33,7 @@ function Gameboard() {
 
 
 function Cell() {
-  let value = 0;
+  let value = "";
 
   const addToken = (player) => value = player;
 
@@ -75,17 +75,18 @@ function GameEngine() {
 
     board1 = board.printBoard()
 
-    if(board1[0][0] !== 0 && board1[0][0] === board1[1][1] && board1[1][1] === board1[2][2]){
+    
+    if(!!board1[0][0] && board1[0][0] === board1[1][1] && board1[1][1] === board1[2][2]){
       console.log (`Player ${getActivePlayer().name} won`)
-    }else if (board1[0][2] !== 0 && board1[0][2] === board1[1][1] && board1[1][1] === board1[2][0]){
+    }else if (!!board1[0][2] && board1[0][2] === board1[1][1] && board1[1][1] === board1[2][0]){
       console.log (`Player ${getActivePlayer().name} won`)
     }
     
 
     for(let i = 0; i<3; i++){
-      if (board1[i][0] !== 0 && board1[i][0] === board1[i][1] && board1[i][1] === board1[i][2]){
+      if (!!board1[i][0] && board1[i][0] === board1[i][1] && board1[i][1] === board1[i][2]){
         console.log (`Player ${getActivePlayer().name} won`)
-      }else if (board1[0][i] !== 0 && board1[0][i] === board1[1][i] && board1[1][i] === board1[2][i]){
+      }else if (!!board1[0][i] && board1[0][i] === board1[1][i] && board1[1][i] === board1[2][i]){
         console.log (`Player ${getActivePlayer().name} won`)
       }
     }
