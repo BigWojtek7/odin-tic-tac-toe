@@ -1,0 +1,27 @@
+.container {
+  margin-top: 50px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.turn {
+  font-size: 2rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 5px #8b5cf6 solid;
+}
+
+.cell {
+  color: #ffffff;
+  background: #1e90ff ;
+  border: 3px #8b5cf6 solid;
+  font-size: 4rem;
+  width: 200px;
+  height: 200px;
+
+}

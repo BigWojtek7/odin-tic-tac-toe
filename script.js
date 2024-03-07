@@ -98,36 +98,57 @@ function GameEngine() {
 
   printNewRound();
 
-  return {playRound, getActivePlayer, board: board.getBoard()}
+  return { playRound, getActivePlayer, getBoard: board.getBoard };
 
 }
 
 
 function DisplayHandler() {
-  const game = GameEngine()
+  const game = GameEngine();
+  console.log(game)
+  const playerTurnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
 
-  const playerTurnDiv = document.querySelector(".turn")
-  const boardDiv = document.querySelector(".board")
+  const updateDisplay = () => {
+    boardDiv.textContent = "";
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
 
-  const board = game.getBoard();
-  const activePlayer = game.getActivePlayer();
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
 
-  playerTurnDiv.textContent = `${activePlayer.name}'s turn`
+    board.forEach((row, rowIndex) => {
+      row.forEach((column, columnIndex) => {
+        const cellButton = document.createElement("button");
+        cellButton.classList.add("cell");
 
-  board.forEach((row, rowIndex) => {
-    row.forEach((column, columnIndex) => {
-      const cellButton = document.createElement("button")
-      cellButton.classList.add("cell")
+        cellButton.dataset.row = rowIndex;
+        cellButton.dataset.column = columnIndex;
 
-      cellButton.dataset.row = rowIndex;
-      cellButton.dataset.column = columnIndex;
+        cellButton.textContent = column.getValue();
 
-      cellButton.textContent = column.getValue();
+        boardDiv.appendChild(cellButton);
 
-      boardDiv.appendChild(cellButton);
+      });   
+    });
+  }
 
-    });   
-  });
+    function clickHandler(e){
+      const buttonRow = e.target.dataset.row;
+      const buttonColumn = e.target.dataset.column;
+
+      if(!buttonRow) return;
+      if(!buttonColumn) return;
+    
+
+      game.playRound(buttonRow, buttonColumn)
+      updateDisplay()
+    }
+  
+
+    boardDiv.addEventListener("click", clickHandler);
+    updateDisplay();
+  
 }
+
 
 DisplayHandler()
