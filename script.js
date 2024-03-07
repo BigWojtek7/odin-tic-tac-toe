@@ -75,7 +75,6 @@ function GameEngine() {
 
     board1 = board.printBoard()
 
-    
     if(!!board1[0][0] && board1[0][0] === board1[1][1] && board1[1][1] === board1[2][2]){
       console.log (`Player ${getActivePlayer().name} won`)
     }else if (!!board1[0][2] && board1[0][2] === board1[1][1] && board1[1][1] === board1[2][0]){
@@ -83,7 +82,7 @@ function GameEngine() {
     }
     
 
-    for(let i = 0; i<3; i++){
+    for(let i = 0; i < board1.length; i++){
       if (!!board1[i][0] && board1[i][0] === board1[i][1] && board1[i][1] === board1[i][2]){
         console.log (`Player ${getActivePlayer().name} won`)
       }else if (!!board1[0][i] && board1[0][i] === board1[1][i] && board1[1][i] === board1[2][i]){
@@ -106,7 +105,6 @@ function GameEngine() {
 
 function DisplayHandler() {
   const game = GameEngine();
-  console.log(game)
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
 
@@ -125,27 +123,58 @@ function DisplayHandler() {
         cellButton.dataset.row = rowIndex;
         cellButton.dataset.column = columnIndex;
 
+        if (column.getValue()=== "X"  ){
+          cellButton.style.background = "green"
+          cellButton.disabled = true;
+        }else if (column.getValue()=== "O"){
+          cellButton.style.background = "red"
+          cellButton.disabled = true;
+        }
         cellButton.textContent = column.getValue();
 
         boardDiv.appendChild(cellButton);
+        
 
       });   
     });
+    // const allButtons = document.querySelectorAll(".cell");
+    // const getButtons = () => allButtons;
+    // return {getButtons};
   }
+
+
+
+
 
     function clickHandler(e){
       const buttonRow = e.target.dataset.row;
       const buttonColumn = e.target.dataset.column;
-
+      
+      
+      console.log(e.target)
+      console.log(e.currentTarget)
+      // e.target.setAttribute("disabled", true)
+      // if (e.target.getAttribute("disabled") === "true" ) return;
       if(!buttonRow) return;
       if(!buttonColumn) return;
     
 
       game.playRound(buttonRow, buttonColumn)
       updateDisplay()
-    }
-  
+      
 
+    }
+    // const allButtons = updateDisplay().getButtons()
+    // console.log(updateDisplay().getButtons())
+
+    // allButtons.forEach((button) => {
+    //   button.addEventListener("click", clickHandler)
+    //   console.log(button)
+      
+    
+    
+    // });
+    
     boardDiv.addEventListener("click", clickHandler);
     updateDisplay();
   
