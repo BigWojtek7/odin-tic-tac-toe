@@ -48,11 +48,11 @@ function Cell() {
 function GameEngine() {
   players = [{
     name: "player one",
-    token: 1
+    token: "X"
   },
   {
     name: "player two",
-    token: 2
+    token: "O"
   }];
 
   board = Gameboard();

@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
+  font-family: sans-serif, Verdana;
 }
 
 .turn {
@@ -20,7 +21,7 @@
   color: #ffffff;
   background: #1e90ff ;
   border: 3px #8b5cf6 solid;
-  font-size: 4rem;
+  font-size: 8rem;
   width: 200px;
   height: 200px;
 
