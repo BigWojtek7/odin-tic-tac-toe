@@ -98,9 +98,36 @@ function GameEngine() {
 
   printNewRound();
 
-  return {playRound, getActivePlayer}
+  return {playRound, getActivePlayer, board: board.getBoard()}
 
 }
 
 
-const game = GameEngine();
+function DisplayHandler() {
+  const game = GameEngine()
+
+  const playerTurnDiv = document.querySelector(".turn")
+  const boardDiv = document.querySelector(".board")
+
+  const board = game.getBoard();
+  const activePlayer = game.getActivePlayer();
+
+  playerTurnDiv.textContent = `${activePlayer.name}'s turn`
+
+  board.forEach((row, rowIndex) => {
+    row.forEach((column, columnIndex) => {
+      const cellButton = document.createElement("button")
+      cellButton.classList.add("cell")
+
+      cellButton.dataset.row = rowIndex;
+      cellButton.dataset.column = columnIndex;
+
+      cellButton.textContent = column.getValue();
+
+      boardDiv.appendChild(cellButton);
+
+    });   
+  });
+}
+
+DisplayHandler()
