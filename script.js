@@ -54,7 +54,7 @@ function GameEngine(p1 = "player11", p2 = "player22") {
     name: p2,
     token: "O"
   }];
-
+  console.log("ile razy game engine")
   board = Gameboard();
 
   let activePlayer = players[0];
@@ -62,7 +62,6 @@ function GameEngine(p1 = "player11", p2 = "player22") {
   const switchTurns = () => activePlayer = activePlayer === players[0] ? players[1] : players[0];
 
   const getActivePlayer = () => activePlayer;
-  console.log(activePlayer.name)
 
   const printNewRound = () => {
     board.printBoard();
@@ -73,20 +72,25 @@ function GameEngine(p1 = "player11", p2 = "player22") {
     console.log(`Droping token ${getActivePlayer().name} into row ${row} and column ${column}`)
     board.dropToken(row, column, getActivePlayer().token)
 
-    board1 = board.printBoard()
+    board1 = board.printBoard();
 
     if(!!board1[0][0] && board1[0][0] === board1[1][1] && board1[1][1] === board1[2][2]){
       console.log (`Player ${getActivePlayer().name} won`)
+      ScoreHandler().getWinner(getActivePlayer().token, getActivePlayer().name, players)
+
     }else if (!!board1[0][2] && board1[0][2] === board1[1][1] && board1[1][1] === board1[2][0]){
       console.log (`Player ${getActivePlayer().name} won`)
+      ScoreHandler().getWinner(getActivePlayer().token, getActivePlayer().name, players)
     }
     
 
     for(let i = 0; i < board1.length; i++){
       if (!!board1[i][0] && board1[i][0] === board1[i][1] && board1[i][1] === board1[i][2]){
         console.log (`Player ${getActivePlayer().name} won`)
+        ScoreHandler().getWinner(getActivePlayer().token, getActivePlayer().name, players)
       }else if (!!board1[0][i] && board1[0][i] === board1[1][i] && board1[1][i] === board1[2][i]){
         console.log (`Player ${getActivePlayer().name} won`)
+        ScoreHandler().getWinner(getActivePlayer().token, getActivePlayer().name, players)
       }
     }
 
@@ -107,7 +111,7 @@ function DisplayHandler(playerName1, playerName2) {
   const game = GameEngine(playerName1, playerName2);
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
-
+  
   const updateDisplay = () => {
     boardDiv.textContent = "";
     const board = game.getBoard();
@@ -140,11 +144,11 @@ function DisplayHandler(playerName1, playerName2) {
   }
 
   function clickHandler(e){
+    e.preventDefault();
     const buttonRow = e.target.dataset.row;
     const buttonColumn = e.target.dataset.column;
     
-    console.log(e.target)
-    console.log(e.currentTarget)
+
     if(!buttonRow) return;
     if(!buttonColumn) return;
   
@@ -160,7 +164,7 @@ function DisplayHandler(playerName1, playerName2) {
 function ScoreHandler(){
 
   const getInput = () => {
-    const dialog = document.querySelector("dialog");
+    const dialog = document.getElementById("number1");
     const closeButton = document.querySelector("dialog button");
     dialog.showModal();
 
@@ -177,15 +181,32 @@ function ScoreHandler(){
     
     )
 
-    console.log(player1, player2)
-
-    // closeButton.addEventListener("click", () => dialog.close());
     
   }
 
-  const getWinner = () => {
+  const getWinner = (token, name, players) => {
+    // const player1Score = document.querySelector(".score-left")
+    // const player2Score = document.querySelector(".score-right")
+    const refresh = document.getElementById("refresh")
+    const dialog2 = document.getElementById("number2")
+    const winner = document.getElementById("winner")
+      winner.textContent=`The winner is ${name}`
+      dialog2.showModal();
+      refresh.addEventListener("click", () => location.reload());
+
+     
+    }
+
+    // DisplayHandler(players[0].name, players[1].name)
+
+  
+  return {getInput, getWinner}
+
+  const reset = () => {
   }
-  return {getInput}
+  
 }
 
-ScoreHandler().getInput()
+
+
+ScoreHandler().getInput();

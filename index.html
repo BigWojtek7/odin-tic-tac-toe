@@ -10,16 +10,23 @@
 <body>
   <div class="container">
     <div class="turn"></div>
+    <!-- <div class="score-left"></div>
+    <div class="score-right"></div> -->
     <div class="board"></div>
-    <dialog>
-      <p>Greetings, one and all!</p>
+    <dialog id="number1">
+      <p>Welcome in ti-tac-toe game <span>beta version</span></p>
       <form method="dialog" id="get-input">
         <label for="player1">Player One:</label>
-        <input id="player1" type="text" name="player1">
+        <input id="player1" type="text" name="player1" required>
         <label for="player2">Player Two:</label>
-        <input id="player2" type="text" name="player2">
+        <input id="player2" type="text" name="player2" required>
         <button>OK</button>
       </form>
+    </dialog>
+    <dialog id="number2">
+      <div id="winner"></div>
+      <img src="wennie.webp" alt="pooh">
+      <button id="refresh">OK</button>
     </dialog>
 
   </div>

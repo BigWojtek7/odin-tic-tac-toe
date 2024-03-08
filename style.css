@@ -5,10 +5,11 @@
   align-items: center;
   gap: 30px;
   font-family: sans-serif, Verdana;
+  color: #1e90ff
 }
 
 .turn {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .board {
@@ -25,4 +26,31 @@
   width: 200px;
   height: 200px;
 
+}
+p {
+  font-size: 1.5rem;
+  color: #1e90ff
+}
+
+#number1 span {
+  font-size: 0.8rem;
+}
+form {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 3px;
+  padding: 7px;
+  font-size: 1.5rem;
+  color: #1e90ff
+}
+
+
+div #winner {
+  font-size: 2rem;
+  color: #1e90ff
+}
+
+img {
+  width: 300px;
+  height: auto;
 }
