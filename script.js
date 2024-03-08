@@ -71,8 +71,10 @@ function GameEngine(p1 = "player11", p2 = "player22") {
   const playRound = (row, column) => {
     console.log(`Droping token ${getActivePlayer().name} into row ${row} and column ${column}`)
     board.dropToken(row, column, getActivePlayer().token)
-
+    
     board1 = board.printBoard();
+    const arr = board1.map(row => row.find(elem => elem === ""))
+    console.log("remis", arr)
 
     if(!!board1[0][0] && board1[0][0] === board1[1][1] && board1[1][1] === board1[2][2]){
       console.log (`Player ${getActivePlayer().name} won`)
@@ -81,6 +83,8 @@ function GameEngine(p1 = "player11", p2 = "player22") {
     }else if (!!board1[0][2] && board1[0][2] === board1[1][1] && board1[1][1] === board1[2][0]){
       console.log (`Player ${getActivePlayer().name} won`)
       ScoreHandler().getWinner(getActivePlayer().token, getActivePlayer().name, players)
+    }else if (arr[0] === undefined && arr[1] === undefined && arr[2] === undefined){
+      ScoreHandler().getDraw(players);
     }
     
 
@@ -184,26 +188,30 @@ function ScoreHandler(){
     
   }
 
-  const getWinner = (token, name, players) => {
-    // const player1Score = document.querySelector(".score-left")
-    // const player2Score = document.querySelector(".score-right")
     const refresh = document.getElementById("refresh")
     const dialog2 = document.getElementById("number2")
     const winner = document.getElementById("winner")
+  const getWinner = (token, name, players) => {
+    // const player1Score = document.querySelector(".score-left")
+    // const player2Score = document.querySelector(".score-right")
+ 
       winner.textContent=`The winner is ${name}`
       dialog2.showModal();
       refresh.addEventListener("click", () => location.reload());
 
      
     }
+  
+  const getDraw = (players) => {
+    winner.textContent=`There is a draw between ${players[0].name} and ${players[1].name} `
+    dialog2.showModal();
+    refresh.addEventListener("click", () => location.reload());
+  }
 
     // DisplayHandler(players[0].name, players[1].name)
 
   
-  return {getInput, getWinner}
-
-  const reset = () => {
-  }
+  return {getInput, getWinner, getDraw}
   
 }
 
